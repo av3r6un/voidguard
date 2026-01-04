@@ -15,7 +15,8 @@ class Stats:
   def _to_int(val: str) -> int:
     try: return int(val)
     except Exception: return 0
-  
+
+  @staticmethod
   def _is_pubkey(token: str) -> bool:
     if token in ['(none)', 'none', '-']: return False
     if len(token) < 20: return False
