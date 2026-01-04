@@ -66,11 +66,11 @@ class Stats:
       tokens = self._WS.split(line.strip())
       if not tokens or not self._is_pubkey(tokens[0]): continue
       data['pubkey'] = tokens[0] if tokens else None
-      data['endpoint'] = tokens[2] if len(tokens) > 2 else None
+      data['endpoint'] = self._is_endpoint(tokens[2]) if len(tokens) > 2 else None
       data['allowed_ips'] = tokens[3] if len(tokens) > 3 else None
-      data['latest_handshake'] = tokens[4] if len(tokens) > 3 else None
-      data['received'] = tokens[5] if len(tokens) > 5 else "0"
-      data['sent'] = tokens[6] if len(tokens) > 6 else "0"
+      data['latest_handshake'] = self._to_int(tokens[4]) if len(tokens) > 3 else None
+      data['received'] = self._to_int(tokens[5]) if len(tokens) > 5 else "0"
+      data['sent'] = self._to_int(tokens[6]) if len(tokens) > 6 else "0"
       stats.append(data)
     return stats
   
