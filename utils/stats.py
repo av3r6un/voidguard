@@ -36,15 +36,10 @@ class Stats:
     if not endpoint or endpoint == '(none)': return None
     if endpoint.count(":") >= 2 and endpoint.startswith("[") and "]:" in endpoint:
       host = endpoint.split("]:", 1)[0].lstrip("[")
-      port = endpoint.split("]:", 1)[1]
-      endpoint_ip = host.strip()
-      endpoint_port = self._to_int(port.strip())
-      ep = f'{endpoint_ip}:{endpoint_port}'
+      ep = host.strip()
     elif ":" in endpoint:
-      host, port = endpoint.rsplit(":", 1)
-      endpoint_ip = host.strip()
-      endpoint_port = self._to_int(port.strip())
-      ep = f'{endpoint_ip}:{endpoint_port}'
+      host, _ = endpoint.rsplit(":", 1)
+      ep = host.strip()
     else:
       ep = endpoint.strip()
     return ep
